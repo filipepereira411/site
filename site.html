@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Site institucional moderno e responsivo em HTML5"
+    />
+    <title>FLDA</title>
+
+    <style>
+      :root {
+        --bg: #0b1020;
+        --bg-soft: #121a2b;
+        --panel: #1a2338;
+        --panel-2: #f4f7fb;
+        --text: #e8edf7;
+        --text-dark: #1b2433;
+        --muted: #a9b6d0;
+        --primary: #5aa9ff;
+        --primary-strong: #2d7ef7;
+        --accent: #8ef0c2;
+        --border: rgba(255, 255, 255, 0.08);
+        --shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+        --radius: 18px;
+        --max-width: 1180px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        background: linear-gradient(180deg, #0b1020 0%, #111827 100%);
+        color: var(--text);
+        line-height: 1.6;
+      }
+
+      img {
+        max-width: 100%;
+        display: block;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .skip-link {
+        position: absolute;
+        left: -9999px;
+        top: 0;
+      }
+
+      .skip-link:focus {
+        left: 1rem;
+        top: 1rem;
+        background: #fff;
+        color: #000;
+        padding: 0.75rem 1rem;
+        z-index: 1000;
+      }
+
+      .container {
+        width: min(var(--max-width), calc(100% - 2rem));
+        margin: 0 auto;
+      }
+
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        backdrop-filter: blur(10px);
+        background: rgba(11, 16, 32, 0.8);
+        border-bottom: 1px solid var(--border);
+      }
+
+      .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 72px;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+      }
+
+      .brand-mark {
+        width: 38px;
+        height: 38px;
+        display: grid;
+        place-items: center;
+        border-radius: 12px;
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        color: #06111e;
+        font-weight: 900;
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        color: var(--muted);
+      }
+
+      .nav-links a:hover,
+      .nav-links a:focus-visible {
+        color: var(--text);
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 0.9rem 1.4rem;
+        border: none;
+        border-radius: 999px;
+        cursor: pointer;
+        font-weight: 700;
+        transition: 0.2s ease;
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, var(--primary), var(--primary-strong));
+        color: white;
+        box-shadow: var(--shadow);
+      }
+
+      .btn-primary:hover,
+      .btn-primary:focus-visible {
+        transform: translateY(-1px);
+        filter: brightness(1.05);
+      }
+
+      .btn-secondary {
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        color: var(--text);
+      }
+
+      .hero {
+        padding: 5rem 0 4rem;
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 2rem;
+        align-items: center;
+      }
+
+      .eyebrow {
+        display: inline-block;
+        padding: 0.45rem 0.8rem;
+        border-radius: 999px;
+        background: rgba(90, 169, 255, 0.12);
+        border: 1px solid rgba(90, 169, 255, 0.28);
+        color: #cfe5ff;
+        font-size: 0.8rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      h1 {
+        font-size: clamp(2.5rem, 5vw, 4.5rem);
+        line-height: 1.05;
+        margin: 1rem 0;
+        letter-spacing: -0.04em;
+      }
+
+      .lead {
+        color: var(--muted);
+        max-width: 60ch;
+        font-size: 1.1rem;
+        margin-bottom: 2rem;
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin-bottom: 2rem;
+      }
+
+      .stats {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2rem;
+      }
+
+      .stat strong {
+        display: block;
+        font-size: 1.7rem;
+      }
+
+      .stat span {
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      .hero-card {
+        background: linear-gradient(180deg, rgba(26, 35, 56, 0.95), rgba(18, 26, 43, 0.95));
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 1.5rem;
+        box-shadow: var(--shadow);
+      }
+
+      .mini-window {
+        background: #0e1527;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 14px;
+        overflow: hidden;
+      }
+
+      .window-top {
+        display: flex;
+        gap: 0.5rem;
+        padding: 0.9rem 1rem;
+        background: rgba(255, 255, 255, 0.02);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      }
+
+      .dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        display: inline-block;
+      }
+
+      .dot.red { background: #ff5f57; }
+      .dot.yellow { background: #ffbd2f; }
+      .dot.green { background: #28c840; }
+
+      .window-body {
+        padding: 1.25rem;
+      }
+
+      .metric {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.8rem 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      }
+
+      .metric:last-child {
+        border-bottom: none;
+      }
+
+      .metric label {
+        color: var(--muted);
+      }
+
+      .metric strong {
+        color: var(--accent);
+      }
+
+      .chart-bars {
+        display: flex;
+        align-items: end;
+        gap: 0.7rem;
+        height: 110px;
+        margin-top: 1rem;
+      }
+
+      .chart-bars span {
+        flex: 1;
+        border-radius: 10px 10px 0 0;
+        background: linear-gradient(180deg, var(--primary), var(--primary-strong));
+        opacity: 0.9;
+      }
+
+      section {
+        padding: 3rem 0;
+      }
+
+      .section-header {
+        text-align: center;
+        margin-bottom: 2rem;
+      }
+
+      .section-header h2 {
+        font-size: clamp(2rem, 3vw, 3rem);
+        margin: 0.5rem 0;
+      }
+
+      .section-header p {
+        color: var(--muted);
+        max-width: 60ch;
+        margin: 0 auto;
+      }
+
+      .features {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1.5rem;
+      }
+
+      .card {
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 1.5rem;
+      }
+
+      .icon {
+        width: 52px;
+        height: 52px;
+        display: grid;
+        place-items: center;
+        border-radius: 14px;
+        margin-bottom: 1rem;
+        background: linear-gradient(135deg, rgba(90,169,255,0.16), rgba(142,240,194,0.12));
+        color: var(--text);
+        font-size: 1.5rem;
+      }
+
+      .card h3 {
+        margin: 0 0 0.6rem;
+        font-size: 1.3rem;
+      }
+
+      .card p {
+        color: var(--muted);
+        margin: 0;
+      }
+
+      .about-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        align-items: center;
+      }
+
+      .about-panel {
+        background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 1.5rem;
+      }
+
+      .about-panel ul li {
+        display: flex;
+        gap: 0.75rem;
+        align-items: flex-start;
+        margin: 1rem 0;
+        color: var(--muted);
+      }
+
+      .check {
+        width: 24px;
+        height: 24px;
+        display: inline-grid;
+        place-items: center;
+        border-radius: 50%;
+        background: rgba(142, 240, 194, 0.15);
+        color: var(--accent);
+        font-weight: 800;
+        flex-shrink: 0;
+      }
+
+      .testimonial-box {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 1rem;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 1.25rem 1.5rem;
+      }
+
+      .avatar {
+        width: 54px;
+        height: 54px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        color: #081525;
+        font-weight: 800;
+      }
+
+      .pricing {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1.5rem;
+      }
+
+      .price-card {
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 1.75rem;
+      }
+
+      .price-card.featured {
+        border-color: rgba(90,169,255,0.5);
+        background: linear-gradient(180deg, rgba(90,169,255,0.08), rgba(255,255,255,0.02));
+        transform: translateY(-4px);
+      }
+
+      .price-card h3 {
+        margin-top: 0;
+      }
+
+      .price {
+        font-size: 2.5rem;
+        font-weight: 800;
+        margin: 0.5rem 0 0.3rem;
+      }
+
+      .price small {
+        font-size: 0.9rem;
+        color: var(--muted);
+      }
+
+      .price-card ul {
+        margin: 1.4rem 0;
+      }
+
+      .price-card li {
+        color: var(--muted);
+        margin-bottom: 0.75rem;
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+      }
+
+      .contact-wrap {
+        display: grid;
+        grid-template-columns: 1fr 1.2fr;
+        gap: 2rem;
+        align-items: start;
+      }
+
+      .contact-info {
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 1.5rem;
+      }
+
+      .contact-info p,
+      .contact-info li {
+        color: var(--muted);
+      }
+
+      form {
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 1.5rem;
+      }
+
+      .field-group {
+        display: grid;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+      }
+
+      label {
+        font-weight: 600;
+      }
+
+      input,
+      textarea {
+        width: 100%;
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 12px;
+        background: rgba(255,255,255,0.02);
+        color: var(--text);
+        padding: 0.9rem 1rem;
+        font: inherit;
+      }
+
+      input:focus,
+      textarea:focus {
+        outline: 2px solid rgba(90,169,255,0.7);
+        outline-offset: 2px;
+      }
+
+      textarea {
+        min-height: 150px;
+        resize: vertical;
+      }
+
+      footer {
+        border-top: 1px solid var(--border);
+        padding: 2rem 0 3rem;
+        color: var(--muted);
+      }
+
+      .footer-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+
+      @media (max-width: 900px) {
+        .hero-grid,
+        .about-grid,
+        .contact-wrap,
+        .features,
+        .pricing {
+          grid-template-columns: 1fr;
+        }
+
+        .nav-links {
+          display: none;
+        }
+
+        .hero {
+          padding-top: 4rem;
+        }
+      }
+
+      @media (max-width: 560px) {
+        h1 {
+          font-size: 2.5rem;
+        }
+
+        .hero-actions {
+          flex-direction: column;
+        }
+
+        .btn {
+          width: 100%;
+        }
+
+        .stats {
+          flex-direction: column;
+          gap: 1rem;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <a class="skip-link" href="#main-content">Pular para o conteúdo</a>
+
+    <header>
+      <div class="container nav">
+        <a href="#" class="brand" aria-label="Página inicial">
+          <span class="brand-mark">N</span>
+          <span>Nome da Empresa</span>
+        </a>
+
+        <nav class="nav-links" aria-label="Navegação principal">
+          <a href="#inicio">Início</a>
+          <a href="#servicos">Serviços</a>
+          <a href="#sobre">Sobre</a>
+          <a href="#precos">Preços</a>
+          <a href="#contato">Contato</a>
+        </nav>
+
+        <a class="btn btn-primary" href="#contato">Fale conosco</a>
+      </div>
+    </header>
+
+    <main id="main-content">
+      <section class="hero" id="inicio">
+        <div class="container hero-grid">
+          <div>
+            <span class="eyebrow">Transformação digital</span>
+            <h1>Seu próximo grande passo começa aqui.</h1>
+            <p class="lead">
+              Ajudamos empresas a crescer com tecnologia, estratégia e design
+              sólido, criando experiências digitais que geram confiança e
+              resultados.
+            </p>
+
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="#contato">Solicitar orçamento</a>
+              <a class="btn btn-secondary" href="#servicos">Conhecer serviços</a>
+            </div>
+
+            <div class="stats" aria-label="Estatísticas da empresa">
+              <div class="stat">
+                <strong>+250</strong>
+                <span>Projetos entregues</span>
+              </div>
+              <div class="stat">
+                <strong>12k</strong>
+                <span>Usuários ativos</span>
+              </div>
+              <div class="stat">
+                <strong>98%</strong>
+                <span>Satisfação</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-card" aria-label="Resumo de métricas">
+            <div class="mini-window">
+              <div class="window-top" aria-hidden="true">
+                <span class="dot red"></span>
+                <span class="dot yellow"></span>
+                <span class="dot green"></span>
+              </div>
+              <div class="window-body">
+                <div class="metric">
+                  <label>Taxa de conversão</label>
+                  <strong>+38%</strong>
+                </div>
+                <div class="metric">
+                  <label>Tempo de resposta</label>
+                  <strong>2.4s</strong>
+                </div>
+                <div class="metric">
+                  <label>Retenção</label>
+                  <strong>84%</strong>
+                </div>
+
+                <div class="chart-bars" aria-label="Gráfico de desempenho">
+                  <span style="height: 32%;"></span>
+                  <span style="height: 52%;"></span>
+                  <span style="height: 48%;"></span>
+                  <span style="height: 70%;"></span>
+                  <span style="height: 84%;"></span>
+                  <span style="height: 92%;"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="servicos">
+        <div class="container">
+          <div class="section-header">
+            <span class="eyebrow">Serviços</span>
+            <h2>O que fazemos para impulsionar sua presença digital</h2>
+            <p>
+              Soluções pensadas para fortalecer sua marca, melhorar a experiência
+              do cliente e criar crescimento sustentável.
+            </p>
+          </div>
+
+          <div class="features">
+            <article class="card">
+              <div class="icon" aria-hidden="true">⚡</div>
+              <h3>Sites e Landing Pages</h3>
+              <p>
+                Desenvolvimento rápido, moderno e otimizado para conversão,
+                performance e clareza de mensagem.
+              </p>
+            </article>
+
+            <article class="card">
+              <div class="icon" aria-hidden="true">📈</div>
+              <h3>Estratégia Digital</h3>
+              <p>
+                Posicionamento, planejamento e estruturas de conteúdo que ajudam
+                sua empresa a vender melhor e manter consistência.
+              </p>
+            </article>
+
+            <article class="card">
+              <div class="icon" aria-hidden="true">🛠️</div>
+              <h3>Manutenção e Suporte</h3>
+              <p>
+                Acompanhamento contínuo para garantir estabilidade, segurança e
+                evolução do seu ambiente digital.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="sobre">
+        <div class="container about-grid">
+          <div class="about-panel">
+            <span class="eyebrow">Sobre nós</span>
+            <h2>Foco em soluções que entregam valor real</h2>
+            <p class="lead">
+              Trabalhamos com empresas que querem crescer com inteligência,
+              clareza e uma presença digital profissional.
+            </p>
+
+            <ul>
+              <li>
+                <span class="check" aria-hidden="true">✓</span>
+                <span>Processos simples, objetivos e orientados a resultados.</span>
+              </li>
+              <li>
+                <span class="check" aria-hidden="true">✓</span>
+                <span>Design funcional, acessível e alinhado à sua identidade.</span>
+              </li>
+              <li>
+                <span class="check" aria-hidden="true">✓</span>
+                <span>Estratégia de comunicação para fortalecer sua autoridade.</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="testimonial-box">
+            <div>
+              <p>
+                “Trabalhar com essa equipe foi essencial para transformar nossa
+                presença online. O resultado foi mais profissionalismo, credibilidade
+                e conversão.”
+              </p>
+              <strong>Maria Silva</strong>
+              <br />
+              <span style="color: var(--muted);">Diretora Comercial</span>
+            </div>
+            <div class="avatar" aria-label="Avatar do cliente">MS</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="precos">
+        <div class="container">
+          <div class="section-header">
+            <span class="eyebrow">Planos</span>
+            <h2>Escolha o melhor para sua etapa</h2>
+            <p>
+              Estruturas simples, transparentes e escaláveis conforme a maturidade
+              do seu negócio.
+            </p>
+          </div>
+
+          <div class="pricing">
+            <article class="price-card">
+              <h3>Iniciante</h3>
+              <div class="price">R$ 299 <small>/mês</small></div>
+              <p>Ideal para apresentação de marca e presença básica.</p>
+
+              <ul>
+                <li>✓ Site institucional</li>
+                <li>✓ 3 seções principais</li>
+                <li>✓ Suporte básico</li>
+              </ul>
+
+              <a class="btn btn-secondary" href="#contato">Escolher</a>
+            </article>
+
+            <article class="price-card featured">
+              <h3>Profissional</h3>
+              <div class="price">R$ 699 <small>/mês</small></div>
+              <p>Para negócios que querem crescer com mais estrutura.</p>
+
+              <ul>
+                <li>✓ Site completo</li>
+                <li>✓ Landing pages</li>
+                <li>✓ SEO básico</li>
+                <li>✓ Suporte prioritário</li>
+              </ul>
+
+              <a class="btn btn-primary" href="#contato">Escolher</a>
+            </article>
+
+            <article class="price-card">
+              <h3>Personalizado</h3>
+              <div class="price">Sob consulta</div>
+              <p>Estratégias e projetos feitos sob medida.</p>
+
+              <ul>
+                <li>✓ Sistema customizado</li>
+                <li>✓ Consultoria</li>
+                <li>✓ Evolução contínua</li>
+              </ul>
+
+              <a class="btn btn-secondary" href="#contato">Falar com especialista</a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="contato">
+        <div class="container contact-wrap">
+          <div class="contact-info">
+            <span class="eyebrow">Contato</span>
+            <h2>Vamos conversar sobre seu projeto?</h2>
+            <p>
+              Conte-nos sua necessidade e retornaremos com uma proposta alinhada ao
+              seu objetivo.
+            </p>
+
+            <ul>
+              <li>📍 Estrada dos Luízes, 17, 2070-388 Pontével</li>
+              <li>📞 (351) 928037083</li>
+              <li>✉️ filipepereira8708311@hotmail.com</li>
+            </ul>
+          </div>
+
+          <form action="#" method="post" aria-label="Formulário de contato">
+            <div class="field-group">
+              <label for="nome">Nome</label>
+              <input id="nome" name="nome" type="text" placeholder="Filipe Pereira" required />
+            </div>
+
+            <div class="field-group">
+              <label for="email">E-mail</label>
+              <input id="email" name="email" type="email" placeholder="filipepereira8708311@hotmail.com" required />
+            </div>
+
+            <div class="field-group">
+              <label for="mensagem">Mensagem</label>
+              <textarea id="mensagem" name="mensagem" placeholder="Descreva seu projeto..." required></textarea>
+            </div>
+
+            <button class="btn btn-primary" type="submit">Enviar mensagem</button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container footer-row">
+        <div>© 2026 Filipe Pereira. Todos os direitos reservados.</div>
+        <nav aria-label="Links do rodapé">
+          <a href="#inicio">Início</a> |
+          <a href="#servicos">Serviços</a> |
+          <a href="#contato">Contato</a>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>
